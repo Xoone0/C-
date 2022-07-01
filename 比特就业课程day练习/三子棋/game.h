@@ -1,13 +1,19 @@
+#pragma once
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 
-//·ûºÅ¶¨Òå
 #define ROW 3
 #define COL 3
-
-//³õÊ¼»¯ÆåÅÌ
-void Board(char arr[ROW][COL], int row, int col);
-
-//´òÓ¡ÆåÅÌ
-void Board(char  arr[ROW][COL], int row, int col);
+//åˆå§‹åŒ–æ£‹ç›˜
+void Disboard(char arr[ROW][COL], int row, int col);
+//æ‰“å°æ£‹ç›˜
+void Dizboard(char arr[ROW][COL], int row, int col);
+//ç©å®¶ç§»åŠ¨
+void PlayerMove(char arr[ROW][COL], int row,int col);
+//ç”µè„‘ç§»åŠ¨
+void ComerMove(char arr[ROW][COL], int row, int col);
+//åˆ¤æ–­è¾“èµ¢ 
+char IsWin(char arr[ROW][COL], int row, int col);
+//åˆ¤æ–­æ£‹ç›˜æ˜¯å¦æ»¡äº†
+int IsFull(char arr[ROW][COL], int row, int col);
