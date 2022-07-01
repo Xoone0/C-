@@ -1,41 +1,85 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
+
 void menu()
 {
-	printf("**********************\n");
-	printf("**********************\n");
-	printf("****** 1. paly  ******\n");
-	printf("****** 0. exit  ******\n");
-	printf("**********************\n");
-	printf("**********************\n");
-
+	printf("***********************\n");
+	printf("***********************\n");
+	printf("******  1.play   ******\n");
+	printf("******  0.exit   ******\n");
+	printf("***********************\n");
+	printf("***********************\n");
 }
+
 void game()
 {
-	printf("!!!Èı×ÓÆå!!!\n");
-	char arr[ROW][COL] = { 0 };
-	Board(arr,ROW, COL);
-	Dis(arr, ROW, COL);
-}
+	char arr[ROW][COL];
+	Disboard(arr, ROW, COL);
+	Dizboard(arr, ROW, COL);
+	char ret = 0;
+
+	while (1)
+	{
+		PlayerMove(arr, ROW, COL);
+		Dizboard(arr, ROW, COL);
+		ret = IsWin(arr, ROW, COL);
+		if (ret != 'C')
+		{
+			break;
+		}
+		ComerMove(arr, ROW, COL);
+		Dizboard(arr, ROW, COL);
+		ret = IsWin(arr, ROW, COL);
+		if (ret != 'C')
+		{
+			break;
+		}
+	}
+	if (ret == '*')
+	{
+		printf("ç©å®¶èµ¢äº†ï¼\n");
+		Dizboard(arr, ROW, COL);
+
+	}
+	else if (ret == '#')
+	{
+		printf("ç”µè„‘èµ¢äº†!\n");
+		Dizboard(arr, ROW, COL);
+
+	}
+	else
+	{
+		printf("å¹³å±€ï¼(è·å¾—â€œå…«åºœå·¡æŠšâ€è£è€€ç§°å·)\n");
+		printf("ç°å……å€¼18888å…ƒå³å¯å…è´¹è·å¾—å…¨æ–°ç¬”è®°æœ¬ï¼)\n");
+		Dizboard(arr, ROW, COL);
+	}
+	}
+
+
+
+
 int main()
 {
-	int input = 0;
+	int n = 0;
 	do
 	{
+		int un = ((unsigned)time(NULL));
 		menu();
-		printf("ÇëÑ¡Ôñ:>\n");
-		scanf("%d", &input);
-		switch (input)
+		printf("è¯·é€‰æ‹©");
+		scanf("%d", &n);
+		switch (n)
 		{
 		case 1:
 			game();
 			break;
 		case 0:
-			printf("ÍË³öÓÎÏ·");
+			printf("é€€å‡ºæ¸¸æˆï¼");
 			break;
 		default:
-			printf("ÊäÈë´íÎó,ÇëÖØĞÂÊäÈë!");
+			printf("é€‰æ‹©é”™è¯¯ï¼è¯·é‡æ–°é€‰æ‹©");
 			break;
 		}
-	} while (input);
+	} while (n);
+
+	return 0;
 }
