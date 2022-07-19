@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
-//³õÊ¼»¯Êı×é
+//åˆå§‹åŒ–æ•°ç»„
 Inboard(char board[ROWS][COLS], int row, int col, char set)
 {
 	int i = 0;
@@ -18,16 +18,16 @@ print_board(char board[ROWS][COLS], int row, int col)
 {
 	int i = 0;
 	int j = 0;
-	printf("----------É¨À×ÓÎÏ·----------\n");
-	//´òÓ¡ĞòÁĞ
+	printf("----------æ‰«é›·æ¸¸æˆ----------\n");
+	//æ‰“å°åºåˆ—
 	for (i = 0; i <= row; i++)
 	{
 		printf("%d ", i);
 	}printf("\n");
-	//´òÓ¡ÆåÅÌ
+	//æ‰“å°æ£‹ç›˜
 	for (i = 1; i <= row; i++)
 	{
-		printf("%d ", i);//ÊúÁĞĞòÁĞºÅ
+		printf("%d ", i);//ç«–åˆ—åºåˆ—å·
 		for (j = 1; j <= col; j++)
 		{
 			printf("%c ", board[i][j]);
@@ -62,19 +62,19 @@ int static show_user(char mine[ROWS][COLS],int x, int y)
 }
 Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 {
-	int x = 0;//×ø±ê
-	int y = 0;//×ø±ê
-	int win = 0;//ÅÅ²é×ø±êÊÇ·ñÅÅ²éÍê
+	int x = 0;//åæ ‡
+	int y = 0;//åæ ‡
+	int win = 0;//æ’æŸ¥åæ ‡æ˜¯å¦æ’æŸ¥å®Œ
 	do
 	{
 	
-		printf("ÇëÊäÈëĞĞ×ø±ê:>"); scanf("%d", &x);
-		printf("ÇëÊäÈë×İ×ø±ê:>"); scanf("%d", &y);
+		printf("è¯·è¾“å…¥è¡Œåæ ‡:>"); scanf("%d", &x);
+		printf("è¯·è¾“å…¥çºµåæ ‡:>"); scanf("%d", &y);
 		if (x > 0 && x <= row && y <= col && y > 0)
 		{
 			if (mine[x][y] == '1')
 			{
-				printf("ºÜÒÅº¶£¡Äã±»Õ¨ËÀÁË\n");
+				printf("å¾ˆé—æ†¾ï¼ä½ è¢«ç‚¸æ­»äº†\n");
 				print_board(mine, row, col);
 				break;
 			}
@@ -88,13 +88,14 @@ Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 		}
 		else
 		{
-			printf("×ø±ê²»ºÏ·¨!ÇëÖØĞÂÊäÈë\n");
+			printf("åæ ‡ä¸åˆæ³•!è¯·é‡æ–°è¾“å…¥\n");
 		}
 
 
 	} while (win < row + col - zha_dan);
-		if (win == row + col - zha_dan)
+	/*if ï¼ˆwin == row + col - zha_danï¼‰é”™çš„ç¦»è°±*/
+	    if(win == row * col - zha_dan)	
 		{
-			printf("¹§Ï²Äã£¬ÅÅÀ×³É¹¦£¡\n");
+			printf("æ­å–œä½ ï¼Œæ’é›·æˆåŠŸï¼\n");
 		}
 }	
