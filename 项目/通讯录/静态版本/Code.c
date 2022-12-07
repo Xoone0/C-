@@ -122,12 +122,12 @@ void Empty(struct Concats* con)
 	
 }
 
-int Cmpage(const void* a, const void* b)
+int Cmpname(const void* a, const void* b)
 {
-	return ((struct Peopleinfo*)a)->age - ((struct Peopleinfo*)b)->age;
+	return strcmp(((struct Peopleinfo*)a)->name,  ((struct Peopleinfo*)b)->name);
 }
-void Sort(struct Concats* con)
+	void Sort(struct Concats* con)
 {
-	qsort(con->date, con->sz, sizeof(struct Peopleinfo), Cmpage);
-	printf("已按照年纪从小到大排序完毕！\n");
+	qsort(con->date, con->sz, sizeof(struct Peopleinfo), Cmpname);
+	printf("已按照名字从小到大排序完毕！\n");
 }

@@ -41,4 +41,4 @@ void Empty(struct Concats* con);//清空通讯录
 
 void Sort(struct Concats* con);//按名字排序通讯录
 
-int Cmpage(const void* a, const void* b);
+int Cmpname(const void* a, const void* b);
