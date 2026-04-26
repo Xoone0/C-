@@ -14,16 +14,16 @@ void menu()
 
 void game()
 {
-	char show[ROWS][COLS];//打印排查雷信息数组
-	char mine[ROWS][COLS];//布置雷数组
-	//初始化棋盘
+	char show[ROWS][COLS];//印挪息
+	char mine[ROWS][COLS];//
+	//始
 	Inboard(show, ROWS, COLS,'*');
 	Inboard(mine, ROWS, COLS,'0');
-	//打印棋盘
+	//印
 	print_board(show, ROW, COL);
-	//布置雷
+	//
 	Set(mine, ROW, COL);
-	//排查雷
+	//挪
 	Find_show(mine,show, ROW, COL);
 
 
@@ -39,17 +39,17 @@ int main()
 	do
 	{
 		menu();
-		scanf_s("%d", &input);
+		scanf("%d", &input);
 		switch (input)
 		{
 		case 1: 
 			game();
 			break;
 		case 0:
-			printf("退出游戏!\n");
+			printf("顺戏!\n");
 			break;
 		default:
-			printf("选择错误，请重新选择!\n");
+			printf("选选!\n");
 			break;
 		}
 	} while (input);
