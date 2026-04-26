@@ -1,57 +1,65 @@
-#define _CRT_SECURE_NO_WARNINGS 
+#define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
-void menu()
-{
 
+static void clear_input_buffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		// ä¸¢å¼ƒæ— æ•ˆè¾“å…¥
+	}
+}
+
+void menu(void)
+{
 	printf("******************************\n");
 	printf("*****       1. PLAY     ******\n");
 	printf("*****       0. EXIT     ******\n");
 	printf("******************************\n");
-
-
 }
 
-
-void game()
+void game(void)
 {
-	char show[ROWS][COLS];//´òÓ¡ÅÅ²éÀ×ĞÅÏ¢Êı×é
-	char mine[ROWS][COLS];//²¼ÖÃÀ×Êı×é
-	//³õÊ¼»¯ÆåÅÌ
-	Inboard(show, ROWS, COLS,'*');
-	Inboard(mine, ROWS, COLS,'0');
-	//´òÓ¡ÆåÅÌ
+	char show[ROWS][COLS]; // ç©å®¶è§†è§’æ£‹ç›˜
+	char mine[ROWS][COLS]; // é›·åŒºæ£‹ç›˜
+
+	Inboard(show, ROWS, COLS, '*');
+	Inboard(mine, ROWS, COLS, '0');
+
 	print_board(show, ROW, COL);
-	//²¼ÖÃÀ×
 	Set(mine, ROW, COL);
-	//ÅÅ²éÀ×
-	Find_show(mine,show, ROW, COL);
-
-
-	
-
+	Find_show(mine, show, ROW, COL);
 }
 
-
-int main()
+int main(void)
 {
 	srand((unsigned int)time(NULL));
-	int input = 0;
+	int input = -1;
+
 	do
 	{
 		menu();
-		scanf_s("%d", &input);
+		printf("è¯·é€‰æ‹©:>");
+		if (scanf("%d", &input) != 1)
+		{
+			clear_input_buffer();
+			printf("è¾“å…¥æ— æ•ˆï¼Œè¯·è¾“å…¥æ•°å­— 0 æˆ– 1ã€‚\n");
+			continue;
+		}
+
 		switch (input)
 		{
-		case 1: 
+		case 1:
 			game();
 			break;
 		case 0:
-			printf("ÍË³öÓÎÏ·!\n");
+			printf("é€€å‡ºæ¸¸æˆ!\n");
 			break;
 		default:
-			printf("Ñ¡Ôñ´íÎó£¬ÇëÖØĞÂÑ¡Ôñ!\n");
+			printf("é€‰æ‹©é”™è¯¯ï¼Œè¯·é‡æ–°é€‰æ‹©!\n");
 			break;
 		}
-	} while (input);
+	} while (input != 0);
+
 	return 0;
 }
