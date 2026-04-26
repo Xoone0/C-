@@ -1,9 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "Contacts.h"
+
+static void ClearInputBuffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		;
+	}
+}
 void menu()
 {
-	printf("****       RichGirl通讯录        ****\n");
-	printf("*************************************\n");
+		if (scanf("%d", &input) != 1)
+		{
+			printf("效选睢n");
+			ClearInputBuffer();
+			input = -1;
+			continue;
+		}
+	return 0;
+}
 	printf("*************************************\n");
 	printf("*****1. Add           2. Search *****\n");
 	printf("*****3. Del           4. Amend  *****\n");
@@ -48,10 +64,10 @@ int main()
 			Sort(&con);
 			break;
 		case 0:
-			printf("退出通讯录\n");
+			printf("閫�鍑洪�氳褰昞n");
 			break;
 			default:
-				printf("输入有误，请重新选择\n");
+				printf("杈撳叆鏈夎锛岃閲嶆柊閫夋嫨\n");
 				break;
 			}
 	} while (input);
