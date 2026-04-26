@@ -1,6 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
 
+// 清理输入缓冲区，处理非法输入
+static void ClearInputBuffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		;
+	}
+}
+
 // 初始化数组为指定字符
 void Inboard(char board[ROWS][COLS], int row, int col, char set)
 {
@@ -72,26 +82,41 @@ void Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 	int y = 0;
 	int win = 0; // 已翻开的安全格子数
 
-	do
+		do
 	{
-		printf("请输入行坐标:>");
-		scanf("%d", &x);
-		printf("请输入纵坐标:>");
-		scanf("%d", &y);
+			printf("请输入行坐标:>");
+			if (scanf("%d", &x) != 1)
+			{
+				printf("输入无效，请输入数字坐标。\n");
+				ClearInputBuffer();
+				continue;
+			}
+			printf("请输入纵坐标:>");
+			if (scanf("%d", &y) != 1)
+			{
+				printf("输入无效，请输入数字坐标。\n");
+				ClearInputBuffer();
+				continue;
+			}
 
-		if (x > 0 && x <= row && y > 0 && y <= col)
-		{
+			if (x > 0 && x <= row && y > 0 && y <= col)
+			{
 			if (mine[x][y] == '1')
 			{
 				printf("很遗憾！你被炸死了\n");
 				print_board(mine, row, col);
 				break;
 			}
-			else
-			{
-				int count = show_user(mine, x, y);
-				show[x][y] = (char)(count + '0');
-				print_board(show, row, col);
+				else
+				{
+					if (show[x][y] != '*')
+					{
+						printf("该坐标已排查，请输入新的坐标。\n");
+						continue;
+					}
+					int count = show_user(mine, x, y);
+					show[x][y] = (char)(count + '0');
+					print_board(show, row, col);
 				win++;
 			}
 		}
