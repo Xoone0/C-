@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "Contacts.h"
 #define MAX 100
 #define MAX_NAME 8
 #define MAX_SEX 5

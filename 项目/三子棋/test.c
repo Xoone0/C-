@@ -11,9 +11,20 @@ void menu()
 	printf("***********************\n");
 }
 
+// 清理输入缓冲区，避免非法输入导致循环异常
+static void ClearInputBuffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		;
+	}
+}
+
 void game()
 {
 	char arr[ROW][COL];
+	// 先初始化棋盘，再打印初始状态
 	Disboard(arr, ROW, COL);
 	Dizboard(arr, ROW, COL);
 	char ret = 0;
@@ -61,12 +72,19 @@ void game()
 int main()
 {
 	int n = 0;
+	// 使用时间作为随机种子，保证电脑落子随机性
+	srand((unsigned int)time(NULL));
 	do
 	{
-		int un = ((unsigned)time(NULL));
 		menu();
 		printf("请选择");
-		scanf("%d", &n);
+		if (scanf("%d", &n) != 1)
+		{
+			printf("输入无效，请输入 0 或 1。\n");
+			ClearInputBuffer();
+			n = -1;
+			continue;
+		}
 		switch (n)
 		{
 		case 1:

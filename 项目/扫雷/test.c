@@ -1,5 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS 
 #include "game.h"
+
+// 清理输入缓冲区，处理非法输入
+static void ClearInputBuffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		;
+	}
+}
+
 void menu()
 {
 
@@ -39,7 +50,13 @@ int main()
 	do
 	{
 		menu();
-		scanf("%d", &input);
+		if (scanf("%d", &input) != 1)
+		{
+			printf("输入无效，请输入 0 或 1。\n");
+			ClearInputBuffer();
+			input = -1;
+			continue;
+		}
 		switch (input)
 		{
 		case 1: 
