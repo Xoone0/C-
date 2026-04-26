@@ -1,45 +1,42 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
-
-// 初始化数组为指定字符
-void Inboard(char board[ROWS][COLS], int row, int col, char set)
+//初始化数组
+Inboard(char board[ROWS][COLS], int row, int col, char set)
 {
-	for (int i = 0; i < row; i++)
+	int i = 0;
+	int j = 0;
+	for (i = 0; i < row; i++)
 	{
-		for (int j = 0; j < col; j++)
+		for (j = 0; j < col; j++)
 		{
 			board[i][j] = set;
 		}
 	}
 }
 
-// 打印当前棋盘（show 或 mine）
-void print_board(char board[ROWS][COLS], int row, int col)
+print_board(char board[ROWS][COLS], int row, int col)
 {
+	int i = 0;
+	int j = 0;
 	printf("----------扫雷游戏----------\n");
-	// 打印列序号
-	for (int i = 0; i <= row; i++)
+	//打印序列
+	for (i = 0; i <= row; i++)
 	{
 		printf("%d ", i);
-	}
-	printf("\n");
-
-	// 打印行序号与棋盘内容
-	for (int i = 1; i <= row; i++)
+	}printf("\n");
+	//打印棋盘
+	for (i = 1; i <= row; i++)
 	{
-		printf("%d ", i);
-		for (int j = 1; j <= col; j++)
+		printf("%d ", i);//竖列序列号
+		for (j = 1; j <= col; j++)
 		{
 			printf("%c ", board[i][j]);
-		}
-		printf("\n");
+		}printf("\n");
 	}
 }
-
-// 随机放置地雷，地雷用字符 '1' 表示
-void Set(char board[ROWS][COLS], int row, int col)
+Set(char board[ROWS][COLS], int row, int col)
 {
-	int count = ZHA_DAN;
+	int count = zha_dan;
 	while (count)
 	{
 		int x = rand() % row + 1;
@@ -49,37 +46,31 @@ void Set(char board[ROWS][COLS], int row, int col)
 			board[x][y] = '1';
 			count--;
 		}
+
 	}
 }
-
-// 统计 (x, y) 周围 8 个位置的雷数
-static int show_user(char mine[ROWS][COLS], int x, int y)
+int static show_user(char mine[ROWS][COLS],int x, int y)
 {
-	return mine[x - 1][y]
-		+ mine[x - 1][y - 1]
-		+ mine[x][y - 1]
-		+ mine[x + 1][y - 1]
-		+ mine[x + 1][y]
-		+ mine[x + 1][y + 1]
-		+ mine[x][y + 1]
-		+ mine[x - 1][y + 1] - 8 * '0';
+	return mine[x - 1][y] 
+		  +mine[x - 1][y - 1]
+		  +mine[x][y - 1]
+		  +mine[x + 1][y - 1]
+		  +mine[x + 1][y]
+		  +mine[x + 1][y + 1]
+		  +mine[x][y + 1]
+		  +mine[x - 1][y + 1] - 8 * '0';
 }
-
-// 玩家输入坐标进行排雷，踩雷则失败，排完非雷位置则成功
-void Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
+Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 {
-	int x = 0;
-	int y = 0;
-	int win = 0; // 已翻开的安全格子数
-
+	int x = 0;//坐标
+	int y = 0;//坐标
+	int win = 0;//排查坐标是否排查完
 	do
 	{
-		printf("请输入行坐标:>");
-		scanf("%d", &x);
-		printf("请输入纵坐标:>");
-		scanf("%d", &y);
-
-		if (x > 0 && x <= row && y > 0 && y <= col)
+	
+		printf("请输入行坐标:>"); scanf("%d", &x);
+		printf("请输入纵坐标:>"); scanf("%d", &y);
+		if (x > 0 && x <= row && y <= col && y > 0)
 		{
 			if (mine[x][y] == '1')
 			{
@@ -89,8 +80,8 @@ void Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 			}
 			else
 			{
-				int count = show_user(mine, x, y);
-				show[x][y] = (char)(count + '0');
+				int eng = show_user(mine, x, y);
+				show[x][y] = eng + '0';			
 				print_board(show, row, col);
 				win++;
 			}
@@ -100,10 +91,11 @@ void Find_show(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 			printf("坐标不合法!请重新输入\n");
 		}
 
-	} while (win < row * col - ZHA_DAN);
 
-	if (win == row * col - ZHA_DAN)
-	{
-		printf("恭喜你，排雷成功！\n");
-	}
-}
+	} while (win < row + col - zha_dan);
+	/*if （win == row + col - zha_dan）错的离谱*/
+	    if(win == row * col - zha_dan)	
+		{
+			printf("恭喜你，排雷成功！\n");
+		}
+}	
