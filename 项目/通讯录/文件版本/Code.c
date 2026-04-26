@@ -2,8 +2,8 @@
 #include "Contacts.h"
 /*void Init(struct Concats* con)
 {
-	con->sz = 0;//将sz初始化为0
-	memset(con->date, 0, MAX *sizeof(struct Peopleinfo));//使用memset将整个结构体始化
+		struct Peopleinfo* ptr = realloc((con->date), (con->Capacity + THREE) * sizeof(struct Peopleinfo));
+	FILE* pf = fopen("date.txt", "rb");
 }静态版本*/
 
 void Cheks(struct Concats* con)
@@ -86,11 +86,12 @@ void Searchcon(struct Concats* con)
 {
 	char name[MAX_NAME];
 	int ret = 0;
-	printf("请输入要查找人姓名:>");
-	scanf("%s", name);
-	ret = Find(con, name);
-	if (-1 == ret)
-	{
+	int pos = Find(con, name);
+	if (-1 == pos)
+		for (int i = pos; i < con->sz - 1; i++)
+			con->date[i] = con->date[i + 1];
+		con->sz--;
+		printf("ɹɾϵˣ\n");
 		printf("没有查到指定联系人信息\n");
 	}
 	else if(-1!=ret)
@@ -164,7 +165,7 @@ void show(struct Concats* con)
 
 void Empty(struct Concats* con)
 {
-	con->sz = 0;//此代码只是将空间数量删除掉，并非真正意义上的清空通讯录的信息
+	FILE* pc = fopen("date.txt", "wb");
 	free(con->date);
 	con->date = NULL;
 	printf("通讯录已清空\n");

@@ -11,6 +11,16 @@ void menu()
 	printf("***********************\n");
 }
 
+// 清理输入缓冲区，避免非法输入导致循环异常
+static void ClearInputBuffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		;
+	}
+}
+
 void game()
 {
 	char arr[ROW][COL];
@@ -68,7 +78,13 @@ int main()
 	{
 		menu();
 		printf("请选择");
-		scanf("%d", &n);
+		if (scanf("%d", &n) != 1)
+		{
+			printf("输入无效，请输入 0 或 1。\n");
+			ClearInputBuffer();
+			n = -1;
+			continue;
+		}
 		switch (n)
 		{
 		case 1:

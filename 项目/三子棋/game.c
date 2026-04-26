@@ -1,5 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "game.h"
+
+// 清理输入缓冲区，处理非法输入
+static void ClearInputBuffer(void)
+{
+	int ch = 0;
+	while ((ch = getchar()) != '\n' && ch != EOF)
+	{
+		;
+	}
+}
 void Disboard(char arr[ROW][COL], int row, int col)
 {
 	int i, j;
@@ -45,7 +55,12 @@ void PlayerMove(char arr[ROW][COL], int row, int col)
 	while (1)
 	{
 		printf("玩家移动:>\n");
-		scanf("%d %d", &x,&y);
+		if (scanf("%d %d", &x, &y) != 2)
+		{
+			printf("输入格式错误，请输入两个数字坐标，例如: 1 1\n");
+			ClearInputBuffer();
+			continue;
+		}
 		//if (arr[x][y] >= 1 && arr[x][y] == ' ')判断有误
 		if (x >= 1 && x <= row && y >= 1 && y <= col)
 		{
@@ -134,6 +149,6 @@ int IsFull(char arr[ROW][COL], int row, int col)
 			}
 		}
 	}
-	return '1';
+	return 1;
 
 }
