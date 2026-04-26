@@ -55,7 +55,7 @@ void PlayerMove(char arr[ROW][COL], int row, int col)
 				break;
 			}
 
-			else if (arr[x - 1][y - 1] = '#')
+			else if (arr[x - 1][y - 1] == '#')
 			{
 				printf("坐标已被占用,请重新输入\n");
 			}

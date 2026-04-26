@@ -61,9 +61,9 @@ void game()
 int main()
 {
 	int n = 0;
+	srand((unsigned int)time(NULL));
 	do
 	{
-		int un = ((unsigned)time(NULL));
 		menu();
 		printf("请选择");
 		scanf("%d", &n);
