@@ -55,7 +55,9 @@ void PlayerMove(char arr[ROW][COL], int row, int col)
 				break;
 			}
 
-			else if (arr[x - 1][y - 1] = '#')
+			// 该位置已有棋子，提示重新输入
+			else if (arr[x - 1][y - 1] == '#'
+				|| arr[x - 1][y - 1] == '*')
 			{
 				printf("坐标已被占用,请重新输入\n");
 			}

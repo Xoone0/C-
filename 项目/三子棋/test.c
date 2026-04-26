@@ -14,6 +14,7 @@ void menu()
 void game()
 {
 	char arr[ROW][COL];
+	// 先初始化棋盘，再打印初始状态
 	Disboard(arr, ROW, COL);
 	Dizboard(arr, ROW, COL);
 	char ret = 0;
@@ -61,9 +62,10 @@ void game()
 int main()
 {
 	int n = 0;
+	// 使用时间作为随机种子，保证电脑落子随机性
+	srand((unsigned int)time(NULL));
 	do
 	{
-		int un = ((unsigned)time(NULL));
 		menu();
 		printf("请选择");
 		scanf("%d", &n);
